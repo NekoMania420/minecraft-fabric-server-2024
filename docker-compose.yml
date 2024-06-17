@@ -3,6 +3,7 @@ services:
     build: .
     ports:
       - 25565:25565
+      - 8080:8080 # Pl3xMap
     volumes:
       - ./server:/server
     tty: true
