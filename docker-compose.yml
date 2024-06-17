@@ -6,6 +6,8 @@ services:
       - 8080:8080 # Pl3xMap
     volumes:
       - ./server:/server
+    environment:
+      RAM_SIZE: ${RAM_SIZE:-2048}
     tty: true
     stdin_open: true
     restart: always

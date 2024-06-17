@@ -1,12 +1,11 @@
 #!/bin/sh
 
-ram_size=${RAM_SIZE:-2048}
 g1_new_size_percent=30
 g1_max_new_size_percent=40
 g1_heap_region_size=8
 g1_reserve_percent=20
 
-if [ $ram_size -ge 12288 ]; then
+if [ $RAM_SIZE -ge 12288 ]; then
   g1_new_size_percent=40
   g1_max_new_size_percent=50
   g1_heap_region_size=16
@@ -28,4 +27,4 @@ if [ ! -f "server.properties" ]; then
   cp /server.properties .
 fi
 
-sh -c "java -Xms${ram_size}M -Xmx${ram_size}M --add-modules=jdk.incubator.vector -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -XX:G1NewSizePercent=$g1_new_size_percent -XX:G1MaxNewSizePercent=$g1_max_new_size_percent -XX:G1HeapRegionSize=${g1_heap_region_size}M -XX:G1ReservePercent=$g1_reserve_percent -jar fabric-server-launch.jar --nogui"
+sh -c "java -Xms${RAM_SIZE}M -Xmx${RAM_SIZE}M --add-modules=jdk.incubator.vector -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -XX:G1NewSizePercent=$g1_new_size_percent -XX:G1MaxNewSizePercent=$g1_max_new_size_percent -XX:G1HeapRegionSize=${g1_heap_region_size}M -XX:G1ReservePercent=$g1_reserve_percent -jar fabric-server-launch.jar --nogui"
