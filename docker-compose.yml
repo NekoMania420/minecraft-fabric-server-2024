@@ -8,3 +8,4 @@ services:
       - ./server:/server
     tty: true
     stdin_open: true
+    restart: always
